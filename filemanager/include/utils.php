@@ -175,7 +175,6 @@ function fix_filename($str, $transliteration, $convert_spaces = false, $replace_
 
     $str = str_replace(array('"', "'", "/", "\\"), "", $str);
     $str = strip_tags($str);
-//    $str = slugify($str);
 
     // Empty or incorrectly transliterated filename.
     // Here is a point: a good file UNKNOWN_LANGUAGE.jpg could become .jpg in previous code.
@@ -280,8 +279,6 @@ function endsWith($haystack, $needle)
 
 function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path, $relative_image_creation, $relative_path_from_current_pos, $relative_image_creation_name_to_prepend, $relative_image_creation_name_to_append, $relative_image_creation_width, $relative_image_creation_height, $relative_image_creation_option, $fixed_image_creation, $fixed_path_from_filemanager, $fixed_image_creation_name_to_prepend, $fixed_image_creation_to_append, $fixed_image_creation_width, $fixed_image_creation_height, $fixed_image_creation_option)
 {
-    echo $targetPath;
-    die("dsqdqsdqs");
     //create relative thumbs
     $all_ok = true;
     if ($relative_image_creation) {
@@ -550,32 +547,6 @@ function is_php($version = '5.0.0')
     }
 
     return $phpVer[$version];
-}
-
-function slugify($text)
-{
-    // replace non letter or digits by -
-    $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-
-    // trim
-    $text = trim($text, '-');
-
-    // transliterate
-    if (function_exists('iconv')) {
-        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-    }
-
-    // lowercase
-    $text = strtolower($text);
-
-    // remove unwanted characters
-    $text = preg_replace('~[^-\w]+~', '', $text);
-
-    if (empty($text)) {
-        return 'n-a';
-    }
-
-    return $text;
 }
 
 ?>
